@@ -1,12 +1,15 @@
 import os
 import requests
 from flask import Flask, request
+from modulo_estudio_mercado import obtener_tendencias_espana
+from amazon_scraper import buscar_amazon
+from tiktok_scraper import obtener_tendencias_tiktok
 
 app = Flask(__name__)
 
 BOT_TOKEN = os.environ['BOT_TOKEN']
 AUTHORIZED_CHAT_ID = os.environ['CHAT_ID']
-URL_BASE = os.environ['URL_BASE']  # Ej: https://cerebro-ia.onrender.com
+URL_BASE = os.environ['URL_BASE']
 
 def enviar_mensaje(mensaje):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
@@ -31,12 +34,26 @@ def webhook():
         return "Unauthorized", 403
 
     if "crear tienda" in text:
-        enviar_mensaje("🔍 Iniciando estudio de mercado y creación de tienda...")
+        enviar_mensaje("🔍 Iniciando estudio de mercado en España...")
+
+        tendencias = obtener_tendencias_espana()
+        enviar_mensaje("📊 Tendencias en Google:
+" + "\n".join(f"• {t}" for t in tendencias))
+
+        producto = tendencias[0]
+        productos_amazon = buscar_amazon(producto)
+        enviar_mensaje(f"🛒 Productos similares en Amazon para '{producto}':
+" + "\n".join(f"• {p}" for p in productos_amazon))
+
+        tiktok_trends = obtener_tendencias_tiktok()
+        enviar_mensaje("🎥 Tendencias actuales en TikTok:
+" + "\n".join(f"• {t}" for t in tiktok_trends))
+
     elif "ayuda" in text:
-        enviar_mensaje("Comandos disponibles:\\n- crear tienda\\n- analizar mercado\\n- generar publicidad")
+        enviar_mensaje("Comandos disponibles:\n- crear tienda\n- analizar mercado\n- generar publicidad")
     else:
         enviar_mensaje("🤖 No entendí el comando. Escribe 'ayuda' para ver opciones.")
-    
+
     return "ok", 200
 
 @app.route("/")
