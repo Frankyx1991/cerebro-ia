@@ -36,18 +36,19 @@ def webhook():
     if "crear tienda" in text:
         enviar_mensaje("🔍 Iniciando estudio de mercado en España...")
 
-        tendencias = obtener_tendencias_espana()
-        enviar_mensaje("📊 Tendencias en Google:
-" + "\n".join(f"• {t}" for t in tendencias))
+        try:
+            tendencias = obtener_tendencias_espana()
+            enviar_mensaje("📊 Tendencias en Google:\n" + "\n".join(f"• {t}" for t in tendencias))
 
-        producto = tendencias[0]
-        productos_amazon = buscar_amazon(producto)
-        enviar_mensaje(f"🛒 Productos similares en Amazon para '{producto}':
-" + "\n".join(f"• {p}" for p in productos_amazon))
+            producto = tendencias[0]
+            productos_amazon = buscar_amazon(producto)
+            enviar_mensaje(f"🛒 Productos similares en Amazon para '{producto}':\n" + "\n".join(f"• {p}" for p in productos_amazon))
 
-        tiktok_trends = obtener_tendencias_tiktok()
-        enviar_mensaje("🎥 Tendencias actuales en TikTok:
-" + "\n".join(f"• {t}" for t in tiktok_trends))
+            tiktok_trends = obtener_tendencias_tiktok()
+            enviar_mensaje("🎥 Tendencias actuales en TikTok:\n" + "\n".join(f"• {t}" for t in tiktok_trends))
+
+        except Exception as e:
+            enviar_mensaje(f"❌ Error detectado: {str(e)}")
 
     elif "ayuda" in text:
         enviar_mensaje("Comandos disponibles:\n- crear tienda\n- analizar mercado\n- generar publicidad")
