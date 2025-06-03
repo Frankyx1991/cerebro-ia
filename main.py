@@ -27,7 +27,7 @@ def webhook():
         enviar_mensaje("Comandos disponibles:\n- crear tienda\n- analizar mercado\n- generar publicidad")
     else:
         enviar_mensaje("🤖 No entendí el comando. Escribe 'ayuda' para ver opciones.")
-    
+
     return "ok", 200
 
 @app.route("/")
