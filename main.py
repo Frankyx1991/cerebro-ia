@@ -23,7 +23,6 @@ def webhook():
 
     if "crear tienda" in text:
         enviar_mensaje("🔍 Iniciando estudio de mercado y creación de tienda...")
-        # Aquí se llamarán los módulos siguientes
     elif "ayuda" in text:
         enviar_mensaje("Comandos disponibles:\n- crear tienda\n- analizar mercado\n- generar publicidad")
     else:
@@ -34,3 +33,7 @@ def webhook():
 @app.route("/")
 def index():
     return "Cerebro IA en funcionamiento", 200
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
