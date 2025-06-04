@@ -1,13 +1,14 @@
 {
-  "name": "cerebro-ia",
+  "name": "cerebro-ia-replit",
   "version": "1.0.0",
-  "description": "Cerebro IA automatizado para gestión de tienda virtual",
-  "main": "main.js",
+  "description": "Cerebro IA con OpenAI y Telegram funcionando correctamente en Replit",
+  "main": "index.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "node-fetch": "^2.6.7"
   }
 }
