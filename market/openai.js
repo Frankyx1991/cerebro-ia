@@ -1,4 +1,3 @@
-
 const fetch = require('node-fetch');
 
 async function preguntarIA(prompt) {
@@ -18,7 +17,11 @@ async function preguntarIA(prompt) {
     });
 
     const data = await response.json();
-    return data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content || '❌ Sin respuesta de OpenAI.';
+    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+      return data.choices[0].message.content;
+    } else {
+      return '❌ Sin respuesta de OpenAI.';
+    }
   } catch (err) {
     console.error('❌ Error en OpenAI:', err);
     return '❌ Error en la solicitud a OpenAI.';

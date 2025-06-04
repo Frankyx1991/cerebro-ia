@@ -1,11 +1,14 @@
 {
-  "name": "cerebro-ia",
+  "name": "cerebro-ia-glitch",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.21.2",
-    "dotenv": "^16.5.0",
-    "node-fetch": "^2.7.0"
+    "node-fetch": "^2.6.7"
   },
   "engines": {
     "node": "18.x"
