@@ -1,42 +1,29 @@
+
 const fetch = require('node-fetch');
-const { preguntarIA } = require('./market/openai.js');
+const { preguntarIA } = require('./market/openai');
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
-const API_URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-async function enviarMensaje(texto, chatId) {
-  console.log("📤 Enviando respuesta:", texto);
-  await fetch(`${API_URL}/sendMessage`, {
+async function enviarMensaje(texto) {
+  await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: texto,
-      parse_mode: "Markdown"
-    })
+    body: JSON.stringify({ chat_id: CHAT_ID, text: texto })
   });
 }
 
-async function procesarComando(mensaje, chatId) {
-  const texto = mensaje.text.trim();
-  console.log("🔍 Procesando comando:", texto);
+async function manejarActualizacion(body) {
+  if (!body.message || !body.message.text) return;
 
-  if (texto === '/start') {
-    await enviarMensaje(`🤖 Bienvenido al Cerebro IA.
-Comandos disponibles:
-/start
-/preguntar <tu duda>`, chatId);
-  } else if (texto.startsWith('/preguntar')) {
-    const pregunta = texto.replace('/preguntar', '').trim();
-    if (!pregunta) {
-      await enviarMensaje('❗ Escribe una pregunta después de /preguntar', chatId);
-    } else {
-      const respuesta = await preguntarIA(pregunta);
-      await enviarMensaje(`🤖 ${respuesta}`, chatId);
-    }
+  const mensaje = body.message.text.trim();
+
+  if (mensaje === '/start') {
+    await enviarMensaje('🤖 Bienvenido al Cerebro IA.\nEscríbeme una idea o pregunta.');
   } else {
-    await enviarMensaje('❓ Comando no reconocido.', chatId);
+    const respuesta = await preguntarIA(mensaje);
+    await enviarMensaje(respuesta);
   }
 }
 
-module.exports = { procesarComando };
+module.exports = { manejarActualizacion };
