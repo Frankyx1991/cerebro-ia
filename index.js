@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const { procesarComando } = require('./bot.js');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 443;
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const API_URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
