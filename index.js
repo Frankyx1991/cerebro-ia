@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const { procesarComando } = require('./bot.js');
 
 const app = express();
-const PORT = 443;
+const PORT = process.env.PORT || 3000;
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const API_URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
@@ -20,7 +20,7 @@ function enviarMensaje(texto) {
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('✅ Cerebro IA activo en Replit.');
+  res.send('✅ Cerebro IA activo en Glitch.');
 });
 
 app.post('/webhook', async (req, res) => {
@@ -36,5 +36,5 @@ app.post('/webhook', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Webhook escuchando en puerto ${PORT}`);
-  enviarMensaje('🧠 Cerebro IA iniciado en Replit con Webhook activo.');
+  enviarMensaje('🧠 Cerebro IA iniciado en Glitch con Webhook activo.');
 });

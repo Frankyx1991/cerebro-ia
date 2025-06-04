@@ -1,7 +1,6 @@
 {
-  "name": "cerebro-ia-replit",
+  "name": "cerebro-ia-glitch",
   "version": "1.0.0",
-  "description": "Cerebro IA con OpenAI y Telegram funcionando correctamente en Replit",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
