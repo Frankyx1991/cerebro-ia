@@ -9,7 +9,7 @@ app.use('/bot', express.raw({ type: '*/*' }));
 app.post('/bot', bot.webhookCallback('/bot'));
 
 app.get('/', (req, res) => {
-  res.send('🤖 Cerebro IA - Bot operativo con IA simulada');
+  res.send('🤖 Cerebro IA conectado a Google Trends en tiempo real.');
 });
 
 app.listen(PORT, async () => {
