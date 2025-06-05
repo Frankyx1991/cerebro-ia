@@ -9,7 +9,7 @@ app.use('/bot', express.raw({ type: '*/*' }));
 app.post('/bot', bot.webhookCallback('/bot'));
 
 app.get('/', (req, res) => {
-  res.send('🤖 Cerebro IA - Webhook activo con botones interactivos');
+  res.send('🤖 Cerebro IA - Bot operativo con IA simulada');
 });
 
 app.listen(PORT, async () => {
