@@ -9,7 +9,7 @@ app.use('/bot', express.raw({ type: '*/*' }));
 app.post('/bot', bot.webhookCallback('/bot'));
 
 app.get('/', (req, res) => {
-  res.send('🤖 Cerebro IA - Integrado con Google Trends y GPT');
+  res.send('🤖 Cerebro IA - Panel completo desde Telegram');
 });
 
 app.listen(PORT, async () => {

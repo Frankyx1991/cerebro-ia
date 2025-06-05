@@ -1,7 +1,7 @@
 {
-  "name": "cerebro-ia-trends-gpt",
-  "version": "1.3.0",
-  "description": "Cerebro IA con Google Trends (SerpAPI) + GPT",
+  "name": "cerebro-ia-panel",
+  "version": "1.4.0",
+  "description": "Cerebro IA con panel de control completo en Telegram",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
