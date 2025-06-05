@@ -1,7 +1,7 @@
 {
   "name": "cerebro-ia-telegram",
-  "version": "1.0.0",
-  "description": "Bot de Telegram para Cerebro IA desplegado en Railway",
+  "version": "1.0.1",
+  "description": "Bot Telegram Cerebro IA con botones interactivos y webhook para Railway o GitHub",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
