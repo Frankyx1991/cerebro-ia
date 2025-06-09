@@ -7,17 +7,19 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// Configurar webhook (Railway necesita URL completa)
-bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot`);
+// Middleware del webhook de Telegram
 app.use(bot.webhookCallback('/bot'));
 
-// Servir archivos HTML estáticos desde /tienda
+// Servir HTML desde carpeta /tienda
 app.use(express.static(path.join(__dirname, 'tienda')));
 
-// Ruta raíz: mostrar index.html de la tienda
+// Página principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'tienda', 'index.html'));
 });
+
+// Configurar webhook de Telegram
+bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot`);
 
 // Iniciar servidor
 app.listen(PORT, () => {
