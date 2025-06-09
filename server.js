@@ -1,37 +1,26 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
-const { Telegraf } = require("telegraf");
-const fs = require("fs");
+const express = require('express');
+const path = require('path');
+const { Telegraf } = require('telegraf');
+require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 8080;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// Ruta de Webhook (Telegram)
-app.use(bot.webhookCallback("/bot"));
+// Configurar webhook (Railway necesita URL completa)
+bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot`);
+app.use(bot.webhookCallback('/bot'));
 
-// Ruta pública para la tienda HTML
-app.use(express.static(path.join(__dirname, "tienda")));
+// Servir archivos HTML estáticos desde /tienda
+app.use(express.static(path.join(__dirname, 'tienda')));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "tienda", "index.html"));
-});
-
-// Ruta opcional para revisar logs directamente (protegida si deseas)
-app.get("/logs", (req, res) => {
-  const logsPath = path.join(__dirname, "logs.txt");
-  if (fs.existsSync(logsPath)) {
-    res.sendFile(logsPath);
-  } else {
-    res.send("Sin logs disponibles.");
-  }
+// Ruta raíz: mostrar index.html de la tienda
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'tienda', 'index.html'));
 });
 
 // Iniciar servidor
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Servidor funcionando en puerto ${PORT}`);
-  bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot`)
-    .then(() => console.log("✅ Webhook configurado con éxito."))
-    .catch(err => console.error("❌ Error al configurar webhook:", err));
+  console.log(`✅ Servidor funcionando en puerto ${PORT}`);
+  console.log(`✅ Webhook configurado en ${process.env.WEBHOOK_URL}/bot`);
 });
