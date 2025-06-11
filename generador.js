@@ -1,1 +1,1 @@
-// Código para generar tienda y logo
+// Código del generador

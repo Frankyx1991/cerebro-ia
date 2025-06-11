@@ -1,1 +1,1 @@
-// Código del bot Telegraf
+// Código del bot
