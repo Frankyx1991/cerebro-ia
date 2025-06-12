@@ -1,0 +1,4 @@
+Error: Cannot find module 'dotenv'
+Require stack:
+- /app/bot.js
+- /app/server.js
