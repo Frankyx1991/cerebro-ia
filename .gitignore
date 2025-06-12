@@ -1,19 +1,4 @@
-# Node modules
-node_modules/
-
-# Entornos y logs
+# Archivos y carpetas ignorados por Git
 .env
+node_modules
 logs.txt
-
-# Archivos del sistema
-.DS_Store
-Thumbs.db
-
-# ZIPs y backups
-*.zip
-*.bak
-
-# Archivos generados por el IDE
-.vscode/
-.idea/
-*.log
