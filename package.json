@@ -1,14 +1,16 @@
 {
   "name": "cerebro-ia",
   "version": "1.0.0",
-  "description": "Cerebro IA para generación automática de tiendas virtuales",
+  "description": "Cerebro IA para generación automática de tiendas HTML",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
+    "axios": "^1.6.7",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "telegraf": "^4.12.2"
+    "telegraf": "^4.16.2"
   }
 }
