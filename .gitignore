@@ -1,0 +1,4 @@
+# Archivos y carpetas ignorados por Git
+.env
+node_modules
+logs.txt
