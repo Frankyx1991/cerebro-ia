@@ -1,16 +1,15 @@
-# Cerebro IA + Xenthia (Automejora)
+# Cerebro IA
 
-Este sistema permite que Xenthia supervise y corrija automáticamente errores en Cerebro IA, como la falta del módulo `dotenv`. Si se detecta el error en los logs, se repara automáticamente e informa por consola.
+Conectado directamente a Xenthia para ejecutar estudios de mercado y análisis inteligentes.
 
-## Estructura
+## Variables de entorno
 
-- `main.js`: núcleo de Xenthia con función de autocorrección.
-- `cerebro_automejora.js`: script adicional que puede ejecutarse manualmente.
-- `.env`: configuración sensible (no subir a GitHub).
-- `.env.example`: ejemplo para compartir en GitHub.
-- `logs.txt`: archivo de ejemplo para pruebas.
-- `package.json`: incluye scripts `start` y `automejora`.
+- `BOT_TOKEN`: token del bot de Telegram
+- `PORT`: puerto del servidor (por defecto 8080)
 
-## Licencia
+## Instalación
 
-MIT.
+```bash
+npm install
+node server.js
+```
